@@ -1,0 +1,1911 @@
+Terminals unused in grammar
+
+   ETOK
+   BREAK
+   CONTINUE
+   OR_COND
+   AND_COND
+
+
+Grammar
+
+    0 $accept: Program $end
+
+    1 Program: DECL Decls_B CODE Code_B
+
+    2 Decls_B: OB Decls CB
+
+    3 Decls: Decls Decl SC
+    4      | %empty
+
+    5 Decl: INT Vars
+
+    6 Vars: Vars COMMA Var
+    7     | Var
+
+    8 Var: IDENTIFIER
+    9    | IDENTIFIER OSB NUMBER OCB
+
+   10 Code_B: OB Stmnts CB
+
+   11 Stmnts: Stmnts Stmnt
+   12       | %empty
+
+   13 Stmnt: Assign SC
+   14      | Printing SC
+   15      | Reading SC
+   16      | Forloop
+   17      | Whileloop
+   18      | Ifelse
+   19      | Got1 SC
+   20      | Got2 SC
+   21      | Labeling
+
+   22 Labeling: IDENTIFIER COL
+
+   23 Got1: GOT IDENTIFIER
+
+   24 Got2: GOTO IDENTIFIER IF Bool
+
+   25 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 OB Stmnts CB
+   26        | FOR IDENTIFIER EQ Var2 COMMA Var2 COMMA Var2 OB Stmnts CB
+
+   27 Var2: NUMBER
+   28     | IDENTIFIER
+   29     | IDENTIFIER OSB Expr OCB
+
+   30 Whileloop: WHILE Bool OB Stmnts CB
+
+   31 Ifelse: IF Bool OB Stmnts CB
+   32       | IF Bool OB Stmnts CB ELSE OB Stmnts CB
+
+   33 Bool: OP Bool CP
+   34     | Expr E Expr
+   35     | Expr NE Expr
+   36     | Expr GT Expr
+   37     | Expr LT Expr
+   38     | Expr GE Expr
+   39     | Expr LE Expr
+
+   40 Printing: PRINT Var1
+
+   41 Reading: READ Varr
+
+   42 Var1: Var1 COMMA Ident
+   43     | Ident
+
+   44 Varr: Varr COMMA Identr
+   45     | Identr
+
+   46 Ident: Expr
+   47      | STRING
+
+   48 Identr: IDENTIFIER
+   49       | IDENTIFIER OSB Expr OCB
+
+   50 Assign: IDENTIFIER EQ Expr
+   51       | IDENTIFIER OSB Expr OCB EQ Expr
+
+   52 Expr: OP Expr CP
+   53     | Expr ADD Expr
+   54     | Expr MUL Expr
+   55     | Expr SUB Expr
+   56     | Expr DIV Expr
+   57     | Expr MOD Expr
+   58     | Expr XOR Expr
+   59     | Expr AND Expr
+   60     | Expr OR Expr
+   61     | NUMBER
+   62     | IDENTIFIER
+   63     | IDENTIFIER OSB Expr OCB
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+DECL (258) 1
+CODE (259) 1
+NUMBER (260) 9 27 61
+IDENTIFIER (261) 8 9 22 23 24 25 26 28 29 48 49 50 51 62 63
+ETOK (262)
+INT (263) 5
+IF (264) 24 31 32
+ELSE (265) 32
+FOR (266) 25 26
+WHILE (267) 30
+GOT (268) 23
+GOTO (269) 24
+PRINT (270) 40
+READ (271) 41
+STRING (272) 47
+BREAK (273)
+CONTINUE (274)
+OR_COND (275)
+AND_COND (276)
+ADD (277) 53
+SUB (278) 55
+MUL (279) 54
+DIV (280) 56
+MOD (281) 57
+XOR (282) 58
+EQ (283) 25 26 50 51
+E (284) 34
+NE (285) 35
+GE (286) 38
+GT (287) 36
+LE (288) 39
+LT (289) 37
+OR (290) 60
+AND (291) 59
+COL (292) 22
+OP (293) 33 52
+CP (294) 33 52
+SC (295) 3 13 14 15 19 20
+OB (296) 2 10 25 26 30 31 32
+CB (297) 2 10 25 26 30 31 32
+COMMA (298) 6 25 26 42 44
+OSB (299) 9 29 49 51 63
+OCB (300) 9 29 49 51 63
+
+
+Nonterminals, with rules where they appear
+
+$accept (46)
+    on left: 0
+Program (47)
+    on left: 1, on right: 0
+Decls_B (48)
+    on left: 2, on right: 1
+Decls (49)
+    on left: 3 4, on right: 2 3
+Decl (50)
+    on left: 5, on right: 3
+Vars (51)
+    on left: 6 7, on right: 5 6
+Var (52)
+    on left: 8 9, on right: 6 7
+Code_B (53)
+    on left: 10, on right: 1
+Stmnts (54)
+    on left: 11 12, on right: 10 11 25 26 30 31 32
+Stmnt (55)
+    on left: 13 14 15 16 17 18 19 20 21, on right: 11
+Labeling (56)
+    on left: 22, on right: 21
+Got1 (57)
+    on left: 23, on right: 19
+Got2 (58)
+    on left: 24, on right: 20
+Forloop (59)
+    on left: 25 26, on right: 16
+Var2 (60)
+    on left: 27 28 29, on right: 25 26
+Whileloop (61)
+    on left: 30, on right: 17
+Ifelse (62)
+    on left: 31 32, on right: 18
+Bool (63)
+    on left: 33 34 35 36 37 38 39, on right: 24 30 31 32 33
+Printing (64)
+    on left: 40, on right: 14
+Reading (65)
+    on left: 41, on right: 15
+Var1 (66)
+    on left: 42 43, on right: 40 42
+Varr (67)
+    on left: 44 45, on right: 41 44
+Ident (68)
+    on left: 46 47, on right: 42 43
+Identr (69)
+    on left: 48 49, on right: 44 45
+Assign (70)
+    on left: 50 51, on right: 13
+Expr (71)
+    on left: 52 53 54 55 56 57 58 59 60 61 62 63, on right: 29 34 35
+    36 37 38 39 46 49 50 51 52 53 54 55 56 57 58 59 60 63
+
+
+State 0
+
+    0 $accept: . Program $end
+
+    DECL  shift, and go to state 1
+
+    Program  go to state 2
+
+
+State 1
+
+    1 Program: DECL . Decls_B CODE Code_B
+
+    OB  shift, and go to state 3
+
+    Decls_B  go to state 4
+
+
+State 2
+
+    0 $accept: Program . $end
+
+    $end  shift, and go to state 5
+
+
+State 3
+
+    2 Decls_B: OB . Decls CB
+
+    $default  reduce using rule 4 (Decls)
+
+    Decls  go to state 6
+
+
+State 4
+
+    1 Program: DECL Decls_B . CODE Code_B
+
+    CODE  shift, and go to state 7
+
+
+State 5
+
+    0 $accept: Program $end .
+
+    $default  accept
+
+
+State 6
+
+    2 Decls_B: OB Decls . CB
+    3 Decls: Decls . Decl SC
+
+    INT  shift, and go to state 8
+    CB   shift, and go to state 9
+
+    Decl  go to state 10
+
+
+State 7
+
+    1 Program: DECL Decls_B CODE . Code_B
+
+    OB  shift, and go to state 11
+
+    Code_B  go to state 12
+
+
+State 8
+
+    5 Decl: INT . Vars
+
+    IDENTIFIER  shift, and go to state 13
+
+    Vars  go to state 14
+    Var   go to state 15
+
+
+State 9
+
+    2 Decls_B: OB Decls CB .
+
+    $default  reduce using rule 2 (Decls_B)
+
+
+State 10
+
+    3 Decls: Decls Decl . SC
+
+    SC  shift, and go to state 16
+
+
+State 11
+
+   10 Code_B: OB . Stmnts CB
+
+    $default  reduce using rule 12 (Stmnts)
+
+    Stmnts  go to state 17
+
+
+State 12
+
+    1 Program: DECL Decls_B CODE Code_B .
+
+    $default  reduce using rule 1 (Program)
+
+
+State 13
+
+    8 Var: IDENTIFIER .
+    9    | IDENTIFIER . OSB NUMBER OCB
+
+    OSB  shift, and go to state 18
+
+    $default  reduce using rule 8 (Var)
+
+
+State 14
+
+    5 Decl: INT Vars .
+    6 Vars: Vars . COMMA Var
+
+    COMMA  shift, and go to state 19
+
+    $default  reduce using rule 5 (Decl)
+
+
+State 15
+
+    7 Vars: Var .
+
+    $default  reduce using rule 7 (Vars)
+
+
+State 16
+
+    3 Decls: Decls Decl SC .
+
+    $default  reduce using rule 3 (Decls)
+
+
+State 17
+
+   10 Code_B: OB Stmnts . CB
+   11 Stmnts: Stmnts . Stmnt
+
+    IDENTIFIER  shift, and go to state 20
+    IF          shift, and go to state 21
+    FOR         shift, and go to state 22
+    WHILE       shift, and go to state 23
+    GOT         shift, and go to state 24
+    GOTO        shift, and go to state 25
+    PRINT       shift, and go to state 26
+    READ        shift, and go to state 27
+    CB          shift, and go to state 28
+
+    Stmnt      go to state 29
+    Labeling   go to state 30
+    Got1       go to state 31
+    Got2       go to state 32
+    Forloop    go to state 33
+    Whileloop  go to state 34
+    Ifelse     go to state 35
+    Printing   go to state 36
+    Reading    go to state 37
+    Assign     go to state 38
+
+
+State 18
+
+    9 Var: IDENTIFIER OSB . NUMBER OCB
+
+    NUMBER  shift, and go to state 39
+
+
+State 19
+
+    6 Vars: Vars COMMA . Var
+
+    IDENTIFIER  shift, and go to state 13
+
+    Var  go to state 40
+
+
+State 20
+
+   22 Labeling: IDENTIFIER . COL
+   50 Assign: IDENTIFIER . EQ Expr
+   51       | IDENTIFIER . OSB Expr OCB EQ Expr
+
+    EQ   shift, and go to state 41
+    COL  shift, and go to state 42
+    OSB  shift, and go to state 43
+
+
+State 21
+
+   31 Ifelse: IF . Bool OB Stmnts CB
+   32       | IF . Bool OB Stmnts CB ELSE OB Stmnts CB
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 46
+
+    Bool  go to state 47
+    Expr  go to state 48
+
+
+State 22
+
+   25 Forloop: FOR . IDENTIFIER EQ Var2 COMMA Var2 OB Stmnts CB
+   26        | FOR . IDENTIFIER EQ Var2 COMMA Var2 COMMA Var2 OB Stmnts CB
+
+    IDENTIFIER  shift, and go to state 49
+
+
+State 23
+
+   30 Whileloop: WHILE . Bool OB Stmnts CB
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 46
+
+    Bool  go to state 50
+    Expr  go to state 48
+
+
+State 24
+
+   23 Got1: GOT . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 51
+
+
+State 25
+
+   24 Got2: GOTO . IDENTIFIER IF Bool
+
+    IDENTIFIER  shift, and go to state 52
+
+
+State 26
+
+   40 Printing: PRINT . Var1
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    STRING      shift, and go to state 53
+    OP          shift, and go to state 54
+
+    Var1   go to state 55
+    Ident  go to state 56
+    Expr   go to state 57
+
+
+State 27
+
+   41 Reading: READ . Varr
+
+    IDENTIFIER  shift, and go to state 58
+
+    Varr    go to state 59
+    Identr  go to state 60
+
+
+State 28
+
+   10 Code_B: OB Stmnts CB .
+
+    $default  reduce using rule 10 (Code_B)
+
+
+State 29
+
+   11 Stmnts: Stmnts Stmnt .
+
+    $default  reduce using rule 11 (Stmnts)
+
+
+State 30
+
+   21 Stmnt: Labeling .
+
+    $default  reduce using rule 21 (Stmnt)
+
+
+State 31
+
+   19 Stmnt: Got1 . SC
+
+    SC  shift, and go to state 61
+
+
+State 32
+
+   20 Stmnt: Got2 . SC
+
+    SC  shift, and go to state 62
+
+
+State 33
+
+   16 Stmnt: Forloop .
+
+    $default  reduce using rule 16 (Stmnt)
+
+
+State 34
+
+   17 Stmnt: Whileloop .
+
+    $default  reduce using rule 17 (Stmnt)
+
+
+State 35
+
+   18 Stmnt: Ifelse .
+
+    $default  reduce using rule 18 (Stmnt)
+
+
+State 36
+
+   14 Stmnt: Printing . SC
+
+    SC  shift, and go to state 63
+
+
+State 37
+
+   15 Stmnt: Reading . SC
+
+    SC  shift, and go to state 64
+
+
+State 38
+
+   13 Stmnt: Assign . SC
+
+    SC  shift, and go to state 65
+
+
+State 39
+
+    9 Var: IDENTIFIER OSB NUMBER . OCB
+
+    OCB  shift, and go to state 66
+
+
+State 40
+
+    6 Vars: Vars COMMA Var .
+
+    $default  reduce using rule 6 (Vars)
+
+
+State 41
+
+   50 Assign: IDENTIFIER EQ . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 67
+
+
+State 42
+
+   22 Labeling: IDENTIFIER COL .
+
+    $default  reduce using rule 22 (Labeling)
+
+
+State 43
+
+   51 Assign: IDENTIFIER OSB . Expr OCB EQ Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 68
+
+
+State 44
+
+   61 Expr: NUMBER .
+
+    $default  reduce using rule 61 (Expr)
+
+
+State 45
+
+   62 Expr: IDENTIFIER .
+   63     | IDENTIFIER . OSB Expr OCB
+
+    OSB  shift, and go to state 69
+
+    $default  reduce using rule 62 (Expr)
+
+
+State 46
+
+   33 Bool: OP . Bool CP
+   52 Expr: OP . Expr CP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 46
+
+    Bool  go to state 70
+    Expr  go to state 71
+
+
+State 47
+
+   31 Ifelse: IF Bool . OB Stmnts CB
+   32       | IF Bool . OB Stmnts CB ELSE OB Stmnts CB
+
+    OB  shift, and go to state 72
+
+
+State 48
+
+   34 Bool: Expr . E Expr
+   35     | Expr . NE Expr
+   36     | Expr . GT Expr
+   37     | Expr . LT Expr
+   38     | Expr . GE Expr
+   39     | Expr . LE Expr
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    E    shift, and go to state 79
+    NE   shift, and go to state 80
+    GE   shift, and go to state 81
+    GT   shift, and go to state 82
+    LE   shift, and go to state 83
+    LT   shift, and go to state 84
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+
+State 49
+
+   25 Forloop: FOR IDENTIFIER . EQ Var2 COMMA Var2 OB Stmnts CB
+   26        | FOR IDENTIFIER . EQ Var2 COMMA Var2 COMMA Var2 OB Stmnts CB
+
+    EQ  shift, and go to state 87
+
+
+State 50
+
+   30 Whileloop: WHILE Bool . OB Stmnts CB
+
+    OB  shift, and go to state 88
+
+
+State 51
+
+   23 Got1: GOT IDENTIFIER .
+
+    $default  reduce using rule 23 (Got1)
+
+
+State 52
+
+   24 Got2: GOTO IDENTIFIER . IF Bool
+
+    IF  shift, and go to state 89
+
+
+State 53
+
+   47 Ident: STRING .
+
+    $default  reduce using rule 47 (Ident)
+
+
+State 54
+
+   52 Expr: OP . Expr CP
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 90
+
+
+State 55
+
+   40 Printing: PRINT Var1 .
+   42 Var1: Var1 . COMMA Ident
+
+    COMMA  shift, and go to state 91
+
+    $default  reduce using rule 40 (Printing)
+
+
+State 56
+
+   43 Var1: Ident .
+
+    $default  reduce using rule 43 (Var1)
+
+
+State 57
+
+   46 Ident: Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 46 (Ident)
+
+
+State 58
+
+   48 Identr: IDENTIFIER .
+   49       | IDENTIFIER . OSB Expr OCB
+
+    OSB  shift, and go to state 92
+
+    $default  reduce using rule 48 (Identr)
+
+
+State 59
+
+   41 Reading: READ Varr .
+   44 Varr: Varr . COMMA Identr
+
+    COMMA  shift, and go to state 93
+
+    $default  reduce using rule 41 (Reading)
+
+
+State 60
+
+   45 Varr: Identr .
+
+    $default  reduce using rule 45 (Varr)
+
+
+State 61
+
+   19 Stmnt: Got1 SC .
+
+    $default  reduce using rule 19 (Stmnt)
+
+
+State 62
+
+   20 Stmnt: Got2 SC .
+
+    $default  reduce using rule 20 (Stmnt)
+
+
+State 63
+
+   14 Stmnt: Printing SC .
+
+    $default  reduce using rule 14 (Stmnt)
+
+
+State 64
+
+   15 Stmnt: Reading SC .
+
+    $default  reduce using rule 15 (Stmnt)
+
+
+State 65
+
+   13 Stmnt: Assign SC .
+
+    $default  reduce using rule 13 (Stmnt)
+
+
+State 66
+
+    9 Var: IDENTIFIER OSB NUMBER OCB .
+
+    $default  reduce using rule 9 (Var)
+
+
+State 67
+
+   50 Assign: IDENTIFIER EQ Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 50 (Assign)
+
+
+State 68
+
+   51 Assign: IDENTIFIER OSB Expr . OCB EQ Expr
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+    OCB  shift, and go to state 94
+
+
+State 69
+
+   63 Expr: IDENTIFIER OSB . Expr OCB
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 95
+
+
+State 70
+
+   33 Bool: OP Bool . CP
+
+    CP  shift, and go to state 96
+
+
+State 71
+
+   34 Bool: Expr . E Expr
+   35     | Expr . NE Expr
+   36     | Expr . GT Expr
+   37     | Expr . LT Expr
+   38     | Expr . GE Expr
+   39     | Expr . LE Expr
+   52 Expr: OP Expr . CP
+   53     | Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    E    shift, and go to state 79
+    NE   shift, and go to state 80
+    GE   shift, and go to state 81
+    GT   shift, and go to state 82
+    LE   shift, and go to state 83
+    LT   shift, and go to state 84
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+    CP   shift, and go to state 97
+
+
+State 72
+
+   31 Ifelse: IF Bool OB . Stmnts CB
+   32       | IF Bool OB . Stmnts CB ELSE OB Stmnts CB
+
+    $default  reduce using rule 12 (Stmnts)
+
+    Stmnts  go to state 98
+
+
+State 73
+
+   53 Expr: Expr ADD . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 99
+
+
+State 74
+
+   55 Expr: Expr SUB . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 100
+
+
+State 75
+
+   54 Expr: Expr MUL . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 101
+
+
+State 76
+
+   56 Expr: Expr DIV . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 102
+
+
+State 77
+
+   57 Expr: Expr MOD . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 103
+
+
+State 78
+
+   58 Expr: Expr XOR . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 104
+
+
+State 79
+
+   34 Bool: Expr E . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 105
+
+
+State 80
+
+   35 Bool: Expr NE . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 106
+
+
+State 81
+
+   38 Bool: Expr GE . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 107
+
+
+State 82
+
+   36 Bool: Expr GT . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 108
+
+
+State 83
+
+   39 Bool: Expr LE . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 109
+
+
+State 84
+
+   37 Bool: Expr LT . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 110
+
+
+State 85
+
+   60 Expr: Expr OR . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 111
+
+
+State 86
+
+   59 Expr: Expr AND . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 112
+
+
+State 87
+
+   25 Forloop: FOR IDENTIFIER EQ . Var2 COMMA Var2 OB Stmnts CB
+   26        | FOR IDENTIFIER EQ . Var2 COMMA Var2 COMMA Var2 OB Stmnts CB
+
+    NUMBER      shift, and go to state 113
+    IDENTIFIER  shift, and go to state 114
+
+    Var2  go to state 115
+
+
+State 88
+
+   30 Whileloop: WHILE Bool OB . Stmnts CB
+
+    $default  reduce using rule 12 (Stmnts)
+
+    Stmnts  go to state 116
+
+
+State 89
+
+   24 Got2: GOTO IDENTIFIER IF . Bool
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 46
+
+    Bool  go to state 117
+    Expr  go to state 48
+
+
+State 90
+
+   52 Expr: OP Expr . CP
+   53     | Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+    CP   shift, and go to state 97
+
+
+State 91
+
+   42 Var1: Var1 COMMA . Ident
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    STRING      shift, and go to state 53
+    OP          shift, and go to state 54
+
+    Ident  go to state 118
+    Expr   go to state 57
+
+
+State 92
+
+   49 Identr: IDENTIFIER OSB . Expr OCB
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 119
+
+
+State 93
+
+   44 Varr: Varr COMMA . Identr
+
+    IDENTIFIER  shift, and go to state 58
+
+    Identr  go to state 120
+
+
+State 94
+
+   51 Assign: IDENTIFIER OSB Expr OCB . EQ Expr
+
+    EQ  shift, and go to state 121
+
+
+State 95
+
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+   63     | IDENTIFIER OSB Expr . OCB
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+    OCB  shift, and go to state 122
+
+
+State 96
+
+   33 Bool: OP Bool CP .
+
+    $default  reduce using rule 33 (Bool)
+
+
+State 97
+
+   52 Expr: OP Expr CP .
+
+    $default  reduce using rule 52 (Expr)
+
+
+State 98
+
+   11 Stmnts: Stmnts . Stmnt
+   31 Ifelse: IF Bool OB Stmnts . CB
+   32       | IF Bool OB Stmnts . CB ELSE OB Stmnts CB
+
+    IDENTIFIER  shift, and go to state 20
+    IF          shift, and go to state 21
+    FOR         shift, and go to state 22
+    WHILE       shift, and go to state 23
+    GOT         shift, and go to state 24
+    GOTO        shift, and go to state 25
+    PRINT       shift, and go to state 26
+    READ        shift, and go to state 27
+    CB          shift, and go to state 123
+
+    Stmnt      go to state 29
+    Labeling   go to state 30
+    Got1       go to state 31
+    Got2       go to state 32
+    Forloop    go to state 33
+    Whileloop  go to state 34
+    Ifelse     go to state 35
+    Printing   go to state 36
+    Reading    go to state 37
+    Assign     go to state 38
+
+
+State 99
+
+   53 Expr: Expr . ADD Expr
+   53     | Expr ADD Expr .
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 53 (Expr)
+
+
+State 100
+
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   55     | Expr SUB Expr .
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 55 (Expr)
+
+
+State 101
+
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   54     | Expr MUL Expr .
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 54 (Expr)
+
+
+State 102
+
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   56     | Expr DIV Expr .
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 56 (Expr)
+
+
+State 103
+
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   57     | Expr MOD Expr .
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 57 (Expr)
+
+
+State 104
+
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   58     | Expr XOR Expr .
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    $default  reduce using rule 58 (Expr)
+
+
+State 105
+
+   34 Bool: Expr E Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 34 (Bool)
+
+
+State 106
+
+   35 Bool: Expr NE Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 35 (Bool)
+
+
+State 107
+
+   38 Bool: Expr GE Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 38 (Bool)
+
+
+State 108
+
+   36 Bool: Expr GT Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 36 (Bool)
+
+
+State 109
+
+   39 Bool: Expr LE Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 39 (Bool)
+
+
+State 110
+
+   37 Bool: Expr LT Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 37 (Bool)
+
+
+State 111
+
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+   60     | Expr OR Expr .
+
+    $default  reduce using rule 60 (Expr)
+
+
+State 112
+
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   59     | Expr AND Expr .
+   60     | Expr . OR Expr
+
+    $default  reduce using rule 59 (Expr)
+
+
+State 113
+
+   27 Var2: NUMBER .
+
+    $default  reduce using rule 27 (Var2)
+
+
+State 114
+
+   28 Var2: IDENTIFIER .
+   29     | IDENTIFIER . OSB Expr OCB
+
+    OSB  shift, and go to state 124
+
+    $default  reduce using rule 28 (Var2)
+
+
+State 115
+
+   25 Forloop: FOR IDENTIFIER EQ Var2 . COMMA Var2 OB Stmnts CB
+   26        | FOR IDENTIFIER EQ Var2 . COMMA Var2 COMMA Var2 OB Stmnts CB
+
+    COMMA  shift, and go to state 125
+
+
+State 116
+
+   11 Stmnts: Stmnts . Stmnt
+   30 Whileloop: WHILE Bool OB Stmnts . CB
+
+    IDENTIFIER  shift, and go to state 20
+    IF          shift, and go to state 21
+    FOR         shift, and go to state 22
+    WHILE       shift, and go to state 23
+    GOT         shift, and go to state 24
+    GOTO        shift, and go to state 25
+    PRINT       shift, and go to state 26
+    READ        shift, and go to state 27
+    CB          shift, and go to state 126
+
+    Stmnt      go to state 29
+    Labeling   go to state 30
+    Got1       go to state 31
+    Got2       go to state 32
+    Forloop    go to state 33
+    Whileloop  go to state 34
+    Ifelse     go to state 35
+    Printing   go to state 36
+    Reading    go to state 37
+    Assign     go to state 38
+
+
+State 117
+
+   24 Got2: GOTO IDENTIFIER IF Bool .
+
+    $default  reduce using rule 24 (Got2)
+
+
+State 118
+
+   42 Var1: Var1 COMMA Ident .
+
+    $default  reduce using rule 42 (Var1)
+
+
+State 119
+
+   49 Identr: IDENTIFIER OSB Expr . OCB
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+    OCB  shift, and go to state 127
+
+
+State 120
+
+   44 Varr: Varr COMMA Identr .
+
+    $default  reduce using rule 44 (Varr)
+
+
+State 121
+
+   51 Assign: IDENTIFIER OSB Expr OCB EQ . Expr
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 128
+
+
+State 122
+
+   63 Expr: IDENTIFIER OSB Expr OCB .
+
+    $default  reduce using rule 63 (Expr)
+
+
+State 123
+
+   31 Ifelse: IF Bool OB Stmnts CB .
+   32       | IF Bool OB Stmnts CB . ELSE OB Stmnts CB
+
+    ELSE  shift, and go to state 129
+
+    $default  reduce using rule 31 (Ifelse)
+
+
+State 124
+
+   29 Var2: IDENTIFIER OSB . Expr OCB
+
+    NUMBER      shift, and go to state 44
+    IDENTIFIER  shift, and go to state 45
+    OP          shift, and go to state 54
+
+    Expr  go to state 130
+
+
+State 125
+
+   25 Forloop: FOR IDENTIFIER EQ Var2 COMMA . Var2 OB Stmnts CB
+   26        | FOR IDENTIFIER EQ Var2 COMMA . Var2 COMMA Var2 OB Stmnts CB
+
+    NUMBER      shift, and go to state 113
+    IDENTIFIER  shift, and go to state 114
+
+    Var2  go to state 131
+
+
+State 126
+
+   30 Whileloop: WHILE Bool OB Stmnts CB .
+
+    $default  reduce using rule 30 (Whileloop)
+
+
+State 127
+
+   49 Identr: IDENTIFIER OSB Expr OCB .
+
+    $default  reduce using rule 49 (Identr)
+
+
+State 128
+
+   51 Assign: IDENTIFIER OSB Expr OCB EQ Expr .
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+
+    $default  reduce using rule 51 (Assign)
+
+
+State 129
+
+   32 Ifelse: IF Bool OB Stmnts CB ELSE . OB Stmnts CB
+
+    OB  shift, and go to state 132
+
+
+State 130
+
+   29 Var2: IDENTIFIER OSB Expr . OCB
+   53 Expr: Expr . ADD Expr
+   54     | Expr . MUL Expr
+   55     | Expr . SUB Expr
+   56     | Expr . DIV Expr
+   57     | Expr . MOD Expr
+   58     | Expr . XOR Expr
+   59     | Expr . AND Expr
+   60     | Expr . OR Expr
+
+    ADD  shift, and go to state 73
+    SUB  shift, and go to state 74
+    MUL  shift, and go to state 75
+    DIV  shift, and go to state 76
+    MOD  shift, and go to state 77
+    XOR  shift, and go to state 78
+    OR   shift, and go to state 85
+    AND  shift, and go to state 86
+    OCB  shift, and go to state 133
+
+
+State 131
+
+   25 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 . OB Stmnts CB
+   26        | FOR IDENTIFIER EQ Var2 COMMA Var2 . COMMA Var2 OB Stmnts CB
+
+    OB     shift, and go to state 134
+    COMMA  shift, and go to state 135
+
+
+State 132
+
+   32 Ifelse: IF Bool OB Stmnts CB ELSE OB . Stmnts CB
+
+    $default  reduce using rule 12 (Stmnts)
+
+    Stmnts  go to state 136
+
+
+State 133
+
+   29 Var2: IDENTIFIER OSB Expr OCB .
+
+    $default  reduce using rule 29 (Var2)
+
+
+State 134
+
+   25 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 OB . Stmnts CB
+
+    $default  reduce using rule 12 (Stmnts)
+
+    Stmnts  go to state 137
+
+
+State 135
+
+   26 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 COMMA . Var2 OB Stmnts CB
+
+    NUMBER      shift, and go to state 113
+    IDENTIFIER  shift, and go to state 114
+
+    Var2  go to state 138
+
+
+State 136
+
+   11 Stmnts: Stmnts . Stmnt
+   32 Ifelse: IF Bool OB Stmnts CB ELSE OB Stmnts . CB
+
+    IDENTIFIER  shift, and go to state 20
+    IF          shift, and go to state 21
+    FOR         shift, and go to state 22
+    WHILE       shift, and go to state 23
+    GOT         shift, and go to state 24
+    GOTO        shift, and go to state 25
+    PRINT       shift, and go to state 26
+    READ        shift, and go to state 27
+    CB          shift, and go to state 139
+
+    Stmnt      go to state 29
+    Labeling   go to state 30
+    Got1       go to state 31
+    Got2       go to state 32
+    Forloop    go to state 33
+    Whileloop  go to state 34
+    Ifelse     go to state 35
+    Printing   go to state 36
+    Reading    go to state 37
+    Assign     go to state 38
+
+
+State 137
+
+   11 Stmnts: Stmnts . Stmnt
+   25 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 OB Stmnts . CB
+
+    IDENTIFIER  shift, and go to state 20
+    IF          shift, and go to state 21
+    FOR         shift, and go to state 22
+    WHILE       shift, and go to state 23
+    GOT         shift, and go to state 24
+    GOTO        shift, and go to state 25
+    PRINT       shift, and go to state 26
+    READ        shift, and go to state 27
+    CB          shift, and go to state 140
+
+    Stmnt      go to state 29
+    Labeling   go to state 30
+    Got1       go to state 31
+    Got2       go to state 32
+    Forloop    go to state 33
+    Whileloop  go to state 34
+    Ifelse     go to state 35
+    Printing   go to state 36
+    Reading    go to state 37
+    Assign     go to state 38
+
+
+State 138
+
+   26 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 COMMA Var2 . OB Stmnts CB
+
+    OB  shift, and go to state 141
+
+
+State 139
+
+   32 Ifelse: IF Bool OB Stmnts CB ELSE OB Stmnts CB .
+
+    $default  reduce using rule 32 (Ifelse)
+
+
+State 140
+
+   25 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 OB Stmnts CB .
+
+    $default  reduce using rule 25 (Forloop)
+
+
+State 141
+
+   26 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 COMMA Var2 OB . Stmnts CB
+
+    $default  reduce using rule 12 (Stmnts)
+
+    Stmnts  go to state 142
+
+
+State 142
+
+   11 Stmnts: Stmnts . Stmnt
+   26 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 COMMA Var2 OB Stmnts . CB
+
+    IDENTIFIER  shift, and go to state 20
+    IF          shift, and go to state 21
+    FOR         shift, and go to state 22
+    WHILE       shift, and go to state 23
+    GOT         shift, and go to state 24
+    GOTO        shift, and go to state 25
+    PRINT       shift, and go to state 26
+    READ        shift, and go to state 27
+    CB          shift, and go to state 143
+
+    Stmnt      go to state 29
+    Labeling   go to state 30
+    Got1       go to state 31
+    Got2       go to state 32
+    Forloop    go to state 33
+    Whileloop  go to state 34
+    Ifelse     go to state 35
+    Printing   go to state 36
+    Reading    go to state 37
+    Assign     go to state 38
+
+
+State 143
+
+   26 Forloop: FOR IDENTIFIER EQ Var2 COMMA Var2 COMMA Var2 OB Stmnts CB .
+
+    $default  reduce using rule 26 (Forloop)
